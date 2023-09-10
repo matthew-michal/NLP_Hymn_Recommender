@@ -2,11 +2,13 @@ from sklearn.metrics.pairwise import cosine_similarity
 import pandas as pd
 import numpy as np
 from sentence_transformers import SentenceTransformer
+import pickle
 
 
 def hymn_recommender(text, hymnal_option, model, num_hymns=20):
-    hymn_df = pd.read_csv(hymnal_option + ".csv")
-    hymn_df = hymn_df.loc[hymn_df["Hymn Text"].notna()]
+    with open(hymnal_option + ".pkl", 'rb') as f:
+        hymn_df = pickle.load(f)
+        hymn_df = hymn_df.loc[hymn_df["Hymn Text"].notna()]
 
     text_emb = model.encode([text])
     hymnal_emb = embed_hymnal(hymn_df, nlp_model=model)
