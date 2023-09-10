@@ -66,3 +66,4 @@ webencodings==0.5.1
 wsproto==1.2.0
 yarg==0.1.9
 zipp==3.16.2
+sentence-transformers==2.2.2
